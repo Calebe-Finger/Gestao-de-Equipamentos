@@ -7,31 +7,64 @@ namespace GestaoDeEquipamentos.ConsoleApp
         static void Main(string[] args)
         {
             TelaEquipamento telaEquip = new TelaEquipamento();
+            TelaChamado telaChama = new TelaChamado();
 
             while (true)
             {
-                char OpcaoEscolhida = telaEquip.ApresentarMenu();
+                char telaEscolhida = '\0';
 
-                if (OpcaoEscolhida == 'S')
-                    break;
-
-                switch (OpcaoEscolhida)
+                if (telaEscolhida == '1')
                 {
-                    case '1':
-                        telaEquip.CadastrarRegistro();
+                    char opcaoEscolhida = telaEquip.ApresentarMenu();
+
+                    if (opcaoEscolhida == 'S')
                         break;
 
-                    case '2':
-                        telaEquip.VisualizarRegistros();
+                    switch (opcaoEscolhida)
+                    {
+                        case '1':
+                            telaEquip.CadastrarRegistro();
+                            break;
+
+                        case '2':
+                            telaEquip.VisualizarRegistros();
+                            break;
+
+                        case '3':
+                            telaEquip.EditarRegistro();
+                            break;
+
+                        case '4':
+                            telaEquip.ExcluirRegistro();
+                            break;
+                    }
+                }
+
+                else if (telaEscolhida == '2')
+                {
+                    char opcaoEscolhida = telaChama.ApresentarMenu();
+
+                    if (opcaoEscolhida == 'S')
                         break;
 
-                    case '3':
-                        telaEquip.EditarRegistro();
-                        break;
+                    switch (opcaoEscolhida)
+                    {
+                        case '1':
+                            telaChama.CadastrarRegistro();
+                            break;
 
-                    case '4':
-                        telaEquip.ExcluirRegistro();
-                        break;
+                        case '2':
+                            telaChama.VisualizarRegistros();
+                            break;
+
+                        case '3':
+                            telaChama.EditarRegistro();
+                            break;
+
+                        case '4':
+                            telaChama.ExcluirRegistro();
+                            break;
+                    }
                 }
             }
         }
