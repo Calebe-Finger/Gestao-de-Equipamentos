@@ -60,7 +60,7 @@
                     continue;
 
                 if (e.id == idSelecionado)
-                    e;
+                    return e;
             }
 
             return null;

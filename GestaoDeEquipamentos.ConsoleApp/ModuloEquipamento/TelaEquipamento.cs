@@ -2,7 +2,7 @@
 {
     public class TelaEquipamento
     {
-        public RepositorioEquipamento repositEquip = new RepositorioEquipamento();
+        public RepositorioEquipamento repositEquip;
 
         public char ApresentarMenu()
         {
