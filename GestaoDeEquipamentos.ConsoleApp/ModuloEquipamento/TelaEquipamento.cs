@@ -4,6 +4,11 @@
     {
         private RepositorioEquipamento repositEquip;
 
+        public TelaEquipamento(RepositorioEquipamento repositorioE)
+        {
+            repositEquip = repositorioE;
+        }
+
         public char ApresentarMenu()
         {
             Console.Clear();

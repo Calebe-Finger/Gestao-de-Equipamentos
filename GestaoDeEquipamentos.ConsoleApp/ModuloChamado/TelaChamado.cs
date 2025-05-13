@@ -6,6 +6,12 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
         private RepositorioEquipamento repositEquip;
         private RepositorioChamado repositChamado;
 
+        public TelaChamado(RepositorioChamado repositorioC, RepositorioEquipamento repositE)
+        {
+            repositChamado = repositorioC;
+            repositEquip = repositE;
+        }
+
         public char ApresentarMenu()
         {
             Console.Clear();
