@@ -3,8 +3,8 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
 {
     public class TelaChamado
     {
-        public RepositorioEquipamento repositEquip;
-        public RepositorioChamado repositChamado;
+        private RepositorioEquipamento repositEquip;
+        private RepositorioChamado repositChamado;
 
         public char ApresentarMenu()
         {
@@ -67,32 +67,6 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
             Console.ReadLine();
         }
 
-        public void ExcluirRegistro()
-        {
-            Console.Clear();
-            Console.WriteLine("----------------------------");
-            Console.WriteLine("Exclusão de Chamados");
-            Console.WriteLine("----------------------------");
-
-            VisualizarRegistros();
-
-            Console.WriteLine("Digite o ID no registro que deseja excluir: ");
-            int idSelecionado = Convert.ToInt32(Console.ReadLine());
-
-            bool conseguiuExcluir = repositChamado.ExcluirChamado(idSelecionado);
-
-            if (!conseguiuExcluir)
-            {
-                Console.WriteLine("Não foi posssível encontrar o registro selecionado.");
-                Console.ReadLine();
-
-                return;
-            }
-
-            Console.WriteLine($"\nO chamado foi excluído com sucesso!");
-            Console.ReadLine();
-        }
-
         public void VisualizarRegistros()
         {
             Console.Clear();
@@ -122,7 +96,33 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
             Console.ReadLine();
         }
 
-        public Chamado ObterDados()
+        public void ExcluirRegistro()
+        {
+            Console.Clear();
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("Exclusão de Chamados");
+            Console.WriteLine("----------------------------");
+
+            VisualizarRegistros();
+
+            Console.WriteLine("Digite o ID no registro que deseja excluir: ");
+            int idSelecionado = Convert.ToInt32(Console.ReadLine());
+
+            bool conseguiuExcluir = repositChamado.ExcluirChamado(idSelecionado);
+
+            if (!conseguiuExcluir)
+            {
+                Console.WriteLine("Não foi posssível encontrar o registro selecionado.");
+                Console.ReadLine();
+
+                return;
+            }
+
+            Console.WriteLine($"\nO chamado foi excluído com sucesso!");
+            Console.ReadLine();
+        }
+
+        private Chamado ObterDados()
         {
             Console.WriteLine("Digite o titulo do chamado: ");
             string titulo = Console.ReadLine();
@@ -139,16 +139,12 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
 
             Equipamento equipamentoSelecionado = repositEquip.SelecionarEquipamentoPorId(idEquipamento);
 
-            Chamado chamado = new Chamado();
-            chamado.titulo = titulo;
-            chamado.descricao = descricao;
-            chamado.dataAbertura = dataAbertura;
-            chamado.equipamento = equipamentoSelecionado;
+            Chamado chamado = new Chamado(titulo, descricao, dataAbertura, equipamentoSelecionado);
 
             return chamado;
         }
 
-        public void VisualizarEquipamentos()
+        private void VisualizarEquipamentos()
         {
             Console.Clear();
             Console.WriteLine("----------------------------");

@@ -3,7 +3,12 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
 {
     public class TelaFabricante
     {
-        public RepositorioFabricante repositorioFabricante;
+        private RepositorioFabricante repositorioFabricante;
+
+        public TelaFabricante(RepositorioFabricante repositorioF)
+        {
+            repositorioFabricante = repositorioF;
+        }
 
         public char ApresentarMenu()
         {
@@ -56,23 +61,6 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
             Console.ReadLine();
         }
 
-        public void ExcluirRegistro()
-        {
-            Console.WriteLine("--------------------------------------");
-            Console.WriteLine("Exclusão de Fabricantes");
-            Console.WriteLine("--------------------------------------");
-
-            VisualizarRegistros();
-
-            Console.WriteLine("Digite o ID no registro que deseja excluir: ");
-            int idSelecionado = Convert.ToInt32(Console.ReadLine());
-
-            repositorioFabricante.ExcluirFabricante(idSelecionado);
-
-            Console.WriteLine($"Fabricante excluido com sucesso!");
-            Console.ReadLine();
-        }
-
         public void VisualizarRegistros()
         {
             Console.Clear();
@@ -102,7 +90,24 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
             Console.ReadLine();
         }
 
-        public Fabricante ObterDados()
+        public void ExcluirRegistro()
+        {
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Exclusão de Fabricantes");
+            Console.WriteLine("--------------------------------------");
+
+            VisualizarRegistros();
+
+            Console.WriteLine("Digite o ID no registro que deseja excluir: ");
+            int idSelecionado = Convert.ToInt32(Console.ReadLine());
+
+            repositorioFabricante.ExcluirFabricante(idSelecionado);
+
+            Console.WriteLine($"Fabricante excluido com sucesso!");
+            Console.ReadLine();
+        }
+
+        private Fabricante ObterDados()
         {
             Console.WriteLine("Digite o nome do fabricante: ");
             string nome = Console.ReadLine();
@@ -113,10 +118,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
             Console.WriteLine("Digite o telefone do fabricante: ");
             string telefone = Console.ReadLine();
 
-            Fabricante fabricante = new Fabricante();
-            fabricante.nome = nome;
-            fabricante.email = email;
-            fabricante.telefone = telefone;
+            Fabricante fabricante = new Fabricante(nome, email, telefone);
 
             return fabricante;
         }

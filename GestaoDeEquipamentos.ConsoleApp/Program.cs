@@ -12,15 +12,14 @@ namespace GestaoDeEquipamentos.ConsoleApp
             RepositorioChamado repositChamado = new RepositorioChamado();
             RepositorioFabricante repositFabricante = new RepositorioFabricante();
 
+            TelaFabricante telaFabricante = new TelaFabricante(repositFabricante);
+
             TelaEquipamento telaEquip = new TelaEquipamento();
             telaEquip.repositEquip = repositEquip;
 
             TelaChamado telaChamado = new TelaChamado();
             telaChamado.repositChamado = repositChamado;
             telaChamado.repositEquip = repositEquip;
-
-            TelaFabricante telaFabricante = new TelaFabricante();
-            telaFabricante.repositorioFabricante = repositFabricante;
 
             while (true)
             {

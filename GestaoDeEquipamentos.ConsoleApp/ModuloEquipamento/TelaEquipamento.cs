@@ -2,7 +2,7 @@
 {
     public class TelaEquipamento
     {
-        public RepositorioEquipamento repositEquip;
+        private RepositorioEquipamento repositEquip;
 
         public char ApresentarMenu()
         {
@@ -37,35 +37,6 @@
             Console.ReadLine();
         }
 
-        public void VisualizarRegistros()
-        {
-            Console.Clear();
-            Console.WriteLine("----------------------------");
-            Console.WriteLine("Visualização de Equipamentos");
-            Console.WriteLine("----------------------------");
-
-            Console.WriteLine(
-                "{0, -4} | {1, -26} | {2, -16} | {3, -14} | {4, -26} | {5, -8} ", 
-                "Id", "Nome", "Preço Aquisição", "Número Série", "Fabricante", "Data Fabricação"
-            );
-
-            Equipamento[] equipamentos = repositEquip.SelecionarEquipamentos();
-
-            for (int i = 0; i < equipamentos.Length; i++)
-            {
-                Equipamento e = equipamentos[i];
-
-                if (e == null)
-                    continue;
-
-                Console.WriteLine(
-                    "{0, -4} | {1, -26} | {2, -16} | {3, -14} | {4, -26} | {5, -8} ",
-                    e.id, e.nome, e.precoAquisicao.ToString("C2"), e.numeroSerie, e.fabricante, e.dataFabricacao.ToShortDateString() 
-                );
-            }
-            Console.ReadLine();
-        }
-
         public void EditarRegistro()
         {
             Console.Clear();
@@ -94,31 +65,33 @@
             Console.ReadLine();
         }
 
-        public Equipamento ObterDados()
+        public void VisualizarRegistros()
         {
-            Console.WriteLine("Digite o nome do equipamento: ");
-            string nome = Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("Visualização de Equipamentos");
+            Console.WriteLine("----------------------------");
 
-            Console.WriteLine("Digite o preço de aquisição do equipamento: ");
-            decimal precoAquisicao = Convert.ToDecimal(Console.ReadLine());
+            Console.WriteLine(
+                "{0, -4} | {1, -26} | {2, -16} | {3, -14} | {4, -26} | {5, -8} ",
+                "Id", "Nome", "Preço Aquisição", "Número Série", "Fabricante", "Data Fabricação"
+            );
 
-            Console.WriteLine("Digite o número de série do equipamento: ");
-            string numeroSerie = Console.ReadLine();
+            Equipamento[] equipamentos = repositEquip.SelecionarEquipamentos();
 
-            Console.WriteLine("Digite o nome da fabricante do equipamento: ");
-            string fabricante = Console.ReadLine();
+            for (int i = 0; i < equipamentos.Length; i++)
+            {
+                Equipamento e = equipamentos[i];
 
-            Console.WriteLine("Digite a data de fabricação do equipamento: ");
-            DateTime dataFabricacao = DateTime.Parse(Console.ReadLine());
+                if (e == null)
+                    continue;
 
-            Equipamento equipamento = new Equipamento();
-            equipamento.nome = nome;
-            equipamento.precoAquisicao = precoAquisicao;
-            equipamento.numeroSerie = numeroSerie;
-            equipamento.fabricante = fabricante;
-            equipamento.dataFabricacao = dataFabricacao;
-
-            return equipamento;
+                Console.WriteLine(
+                    "{0, -4} | {1, -26} | {2, -16} | {3, -14} | {4, -26} | {5, -8} ",
+                    e.id, e.nome, e.precoAquisicao.ToString("C2"), e.numeroSerie, e.fabricante, e.dataFabricacao.ToShortDateString()
+                );
+            }
+            Console.ReadLine();
         }
 
         public void ExcluirRegistro()
@@ -145,6 +118,29 @@
 
             Console.WriteLine($"\nO equipamento foi excluído com sucesso!");
             Console.ReadLine();
+        }
+
+        private Equipamento ObterDados()
+        {
+            Console.WriteLine("Digite o nome do equipamento: ");
+            string nome = Console.ReadLine();
+
+            Console.WriteLine("Digite o preço de aquisição do equipamento: ");
+            decimal precoAquisicao = Convert.ToDecimal(Console.ReadLine());
+
+            Console.WriteLine("Digite o número de série do equipamento: ");
+            string numeroSerie = Console.ReadLine();
+
+            Console.WriteLine("Digite o nome da fabricante do equipamento: ");
+            string fabricante = Console.ReadLine();
+
+            Console.WriteLine("Digite a data de fabricação do equipamento: ");
+            DateTime dataFabricacao = DateTime.Parse(Console.ReadLine());
+
+            Equipamento equipamento = new Equipamento(nome, precoAquisicao, numeroSerie, 
+                fabricante, dataFabricacao);
+
+            return equipamento;
         }
     }
 }
