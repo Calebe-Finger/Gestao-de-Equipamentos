@@ -36,6 +36,22 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
 
             Fabricante novoFabricante = ObterDados();
 
+            string erros = novoFabricante.Validar();
+
+            if (erros.Length > 0)
+            {
+                Console.WriteLine();
+
+                Console.ForegroundColor = ConsoleColor.Red;      //muda a cor da fonte para vermelho
+                Console.WriteLine($"Erros: \n{erros}");
+                Console.ResetColor();                               //volta a cor para a original
+
+                Console.Write("\nDigite ENTER para continuar...");
+                Console.ReadLine();
+
+                return;
+            }
+
             repositorioFabricante.CadastrarFabricante(novoFabricante);
 
             Console.WriteLine($"Fabricante \"{novoFabricante.nome}\" cadastrado com sucesso!");
