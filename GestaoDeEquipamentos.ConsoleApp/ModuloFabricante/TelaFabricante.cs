@@ -49,6 +49,9 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
                 Console.Write("\nDigite ENTER para continuar...");
                 Console.ReadLine();
 
+                //Recursão: Quando um método chama ele mesmo
+                CadastrarRegistro();
+
                 return;
             }
 
