@@ -1,4 +1,4 @@
-# JogoDaForca
+# Gestão de Equipamentos
 
 ![](https://imgur.com/8LCyL6E.gif)
 
