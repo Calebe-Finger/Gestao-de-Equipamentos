@@ -19,11 +19,7 @@
             if (equipamentoSelecionado == null)
                 return false;
 
-            equipamentoSelecionado.nome = equipamentoAtualizado.nome;
-            equipamentoSelecionado.precoAquisicao = equipamentoAtualizado.precoAquisicao;
-            equipamentoSelecionado.numeroSerie = equipamentoAtualizado.numeroSerie;
-            equipamentoSelecionado.fabricante = equipamentoAtualizado.fabricante;
-            equipamentoSelecionado.dataFabricacao = equipamentoAtualizado.dataFabricacao;
+            equipamentoAtualizado.AtualizarRegistro(equipamentoSelecionado);
 
             return true;
         }

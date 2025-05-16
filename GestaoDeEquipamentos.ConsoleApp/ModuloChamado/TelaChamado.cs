@@ -37,11 +37,30 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
             Console.WriteLine("Cadastro de Chamados");
             Console.WriteLine("----------------------------");
 
-            Chamado chamado = ObterDados();
+            Chamado novoChamado = ObterDados();
 
-            repositChamado.CadastrarChamado(chamado);
+            string erros = novoChamado.Validar();
 
-            Console.WriteLine($"\nO Chamado: \"{chamado.titulo}\" foi cadastrado com sucesso!");
+            if (erros.Length > 0)
+            {
+                Console.WriteLine();
+
+                Console.ForegroundColor = ConsoleColor.Red;      //muda a cor da fonte para vermelho
+                Console.WriteLine($"Erros: \n{erros}");
+                Console.ResetColor();                            //volta a cor para a original
+
+                Console.Write("\nDigite ENTER para cadastrar novamente...");
+                Console.ReadLine();
+
+                //Recursão: Quando um método chama ele mesmo
+                CadastrarRegistro();
+
+                return;
+            }
+
+            repositChamado.CadastrarChamado(novoChamado);
+
+            Console.WriteLine($"\nO Chamado: \"{novoChamado.titulo}\" foi cadastrado com sucesso!");
             Console.ReadLine();
         }
 

@@ -46,7 +46,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
                 Console.WriteLine($"Erros: \n{erros}");
                 Console.ResetColor();                               //volta a cor para a original
 
-                Console.Write("\nDigite ENTER para continuar...");
+                Console.Write("\nDigite ENTER para cadastrar novamente...");
                 Console.ReadLine();
 
                 //Recursão: Quando um método chama ele mesmo

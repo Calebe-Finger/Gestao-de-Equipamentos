@@ -34,11 +34,30 @@
             Console.WriteLine("Cadastro de Equipamentos");
             Console.WriteLine("----------------------------");
 
-            Equipamento equipamento = ObterDados();
+            Equipamento novoEquipamento = ObterDados();
 
-            repositEquip.CadastrarEquipamento(equipamento);
+            string erros = novoEquipamento.Validar();
 
-            Console.WriteLine($"\nO equipamento: \"{equipamento.nome}\" foi cadastrado com sucesso!");
+            if (erros.Length > 0)
+            {
+                Console.WriteLine();
+
+                Console.ForegroundColor = ConsoleColor.Red;      //muda a cor da fonte para vermelho
+                Console.WriteLine($"Erros: \n{erros}");
+                Console.ResetColor();                               //volta a cor para a original
+
+                Console.Write("\nDigite ENTER para cadastrar novamente...");
+                Console.ReadLine();
+
+                //Recursão: Quando um método chama ele mesmo
+                CadastrarRegistro();
+
+                return;
+            }
+
+            repositEquip.CadastrarEquipamento(novoEquipamento);
+
+            Console.WriteLine($"\nO equipamento: \"{novoEquipamento.nome}\" foi cadastrado com sucesso!");
             Console.ReadLine();
         }
 

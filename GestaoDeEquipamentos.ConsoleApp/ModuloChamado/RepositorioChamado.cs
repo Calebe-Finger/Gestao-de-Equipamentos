@@ -19,10 +19,7 @@
             if (chamadoSelecionado == null)
                 return false;
 
-            chamadoSelecionado.titulo = chamadoAtualizado.titulo;
-            chamadoSelecionado.descricao = chamadoAtualizado.descricao;
-            chamadoSelecionado.dataAbertura = chamadoAtualizado.dataAbertura;
-            chamadoSelecionado.equipamento = chamadoAtualizado.equipamento;
+            chamadoAtualizado.AtualizarRegistro(chamadoSelecionado);
 
             return true;
         }
