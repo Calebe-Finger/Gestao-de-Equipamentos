@@ -1,8 +1,12 @@
-﻿namespace GestaoDeEquipamentos.ConsoleApp
+﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
+
+namespace GestaoDeEquipamentos.ConsoleApp
 {
     public class TelaEquipamento
     {
         private RepositorioEquipamento repositEquip;
+        public RepositorioFabricante repositFabricante;
 
         public TelaEquipamento(RepositorioEquipamento repositorioE)
         {
@@ -55,7 +59,7 @@
                 return;
             }
 
-            repositEquip.CadastrarEquipamento(novoEquipamento);
+            repositEquip.CadastrarRegistro(novoEquipamento);
 
             Console.WriteLine($"\nO equipamento: \"{novoEquipamento.nome}\" foi cadastrado com sucesso!");
             Console.ReadLine();
@@ -75,7 +79,7 @@
 
             Equipamento equipamentoAtualizado = ObterDados();
 
-            bool conseguiuEditar = repositEquip.EditarEquipamento(idSelecionado, equipamentoAtualizado);
+            bool conseguiuEditar = repositEquip.EditarRegistro(idSelecionado, equipamentoAtualizado);
 
             if (!conseguiuEditar)
             {
@@ -101,11 +105,10 @@
                 "Id", "Nome", "Preço Aquisição", "Número Série", "Fabricante", "Data Fabricação"
             );
 
-            Equipamento[] equipamentos = repositEquip.SelecionarEquipamentos();
-
+            EntidadeBase[] equipamentos = repositEquip.SelecionarRegistros();
             for (int i = 0; i < equipamentos.Length; i++)
             {
-                Equipamento e = equipamentos[i];
+                Equipamento e = (Equipamento)equipamentos[i];
 
                 if (e == null)
                     continue;
@@ -115,6 +118,37 @@
                     e.id, e.nome, e.precoAquisicao.ToString("C2"), e.numeroSerie, e.fabricante, e.dataFabricacao.ToShortDateString()
                 );
             }
+            Console.ReadLine();
+        }
+
+        public void VisualizarFabricantes()
+        {
+            Console.WriteLine();
+
+            Console.WriteLine("Visualização de Fabricantes");
+
+            Console.WriteLine();
+
+            Console.WriteLine(
+                "{0, -10} | {1, -20} | {2, -30} | {3, -15}",
+            "Id", "Nome", "Email", "Telefone"
+            );
+
+            EntidadeBase[] fabricantes = repositFabricante.SelecionarRegistros();
+
+            for (int i = 0; i < fabricantes.Length; i++)
+            {
+                Fabricante f = (Fabricante)fabricantes[i];
+
+                if (f == null)
+                    continue;
+
+                Console.WriteLine(
+                   "{0, -10} | {1, -20} | {2, -30} | {3, -15}",
+                    f.id, f.nome, f.email, f.telefone
+                );
+            }
+
             Console.ReadLine();
         }
 
@@ -130,7 +164,7 @@
             Console.WriteLine("Digite o ID no registro que deseja excluir: ");
             int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
-            bool conseguiuExcluir = repositEquip.ExcluirEquipamento(idSelecionado);
+            bool conseguiuExcluir = repositEquip.ExcluirRegistro(idSelecionado);
 
             if (!conseguiuExcluir)
             {

@@ -1,4 +1,6 @@
 ﻿
+using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
 {
     public class TelaChamado
@@ -58,7 +60,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
                 return;
             }
 
-            repositChamado.CadastrarChamado(novoChamado);
+            repositChamado.CadastrarRegistro(novoChamado);
 
             Console.WriteLine($"\nO Chamado: \"{novoChamado.titulo}\" foi cadastrado com sucesso!");
             Console.ReadLine();
@@ -78,7 +80,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
 
             Chamado chamadoAtualizado = ObterDados();
 
-            bool conseguiuEditar = repositChamado.EditarChamado(idSelecionado, chamadoAtualizado);
+            bool conseguiuEditar = repositChamado.EditarRegistro(idSelecionado, chamadoAtualizado);
 
             if (!conseguiuEditar)
             {
@@ -104,11 +106,13 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
                 "Id", "Título", "Descrição", "Data de Abertura", "Equipamento"
             );
 
-            Chamado[] chamados = repositChamado.SelecionarChamados();
+            EntidadeBase[] chamados = repositChamado.SelecionarRegistros();
 
             for (int i = 0; i < chamados.Length; i++)
             {
-                Chamado c = chamados[i];
+
+
+                Chamado c = (Chamado)chamados[i];
 
                 if (c == null)
                     continue;
@@ -133,7 +137,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
             Console.WriteLine("Digite o ID no registro que deseja excluir: ");
             int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
-            bool conseguiuExcluir = repositChamado.ExcluirChamado(idSelecionado);
+            bool conseguiuExcluir = repositChamado.ExcluirRegistro(idSelecionado);
 
             if (!conseguiuExcluir)
             {
@@ -162,7 +166,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
             Console.WriteLine("Digite o ID do chamado: ");
             int idEquipamento = Convert.ToInt32(Console.ReadLine());
 
-            Equipamento equipamentoSelecionado = repositEquip.SelecionarEquipamentoPorId(idEquipamento);
+            Equipamento equipamentoSelecionado = (Equipamento)repositEquip.SelecionarRegistroPorId(idEquipamento);
 
             Chamado chamado = new Chamado(titulo, descricao, dataAbertura, equipamentoSelecionado);
 
@@ -181,11 +185,11 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
                 "Id", "Nome", "Preço Aquisição", "Número Série", "Fabricante", "Data Fabricação"
             );
 
-            Equipamento[] equipamentos = repositEquip.SelecionarEquipamentos();
+            EntidadeBase[] equipamentos = repositEquip.SelecionarRegistros();
 
             for (int i = 0; i < equipamentos.Length; i++)
             {
-                Equipamento e = equipamentos[i];
+                Equipamento e = (Equipamento)equipamentos[i];
 
                 if (e == null)
                     continue;

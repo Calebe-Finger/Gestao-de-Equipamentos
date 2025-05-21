@@ -1,9 +1,9 @@
-﻿using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
+﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
 {
-
-    public class Chamado
+    public class Chamado : EntidadeBase
     {
         public int id;
         public string titulo;
@@ -39,8 +39,10 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
             return erros;
         }
 
-        public void AtualizarRegistro(Chamado chamadoAtualizado)
+        public override void AtualizarRegistro(EntidadeBase registroAtualizado)
         {
+            Chamado chamadoAtualizado = (Chamado)registroAtualizado;
+
             this.titulo = chamadoAtualizado.titulo;
             this.descricao = chamadoAtualizado.descricao;
             this.dataAbertura = chamadoAtualizado.dataAbertura;

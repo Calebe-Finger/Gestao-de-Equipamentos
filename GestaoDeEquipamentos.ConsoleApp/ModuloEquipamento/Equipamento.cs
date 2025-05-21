@@ -1,8 +1,9 @@
-﻿using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
+﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 
 namespace GestaoDeEquipamentos.ConsoleApp
 {
-    public class Equipamento
+    public class Equipamento : EntidadeBase
     {
         public int id;
         public string nome;
@@ -46,8 +47,10 @@ namespace GestaoDeEquipamentos.ConsoleApp
             return erros;
         }
 
-        public void AtualizarRegistro(Equipamento equipamentoAtualizado)
+        public override void AtualizarRegistro(EntidadeBase registroAtualizado)
         {
+            Equipamento equipamentoAtualizado = (Equipamento)registroAtualizado;
+
             this.nome = equipamentoAtualizado.nome;
             this.precoAquisicao = equipamentoAtualizado.precoAquisicao;
             this.numeroSerie = equipamentoAtualizado.numeroSerie;
