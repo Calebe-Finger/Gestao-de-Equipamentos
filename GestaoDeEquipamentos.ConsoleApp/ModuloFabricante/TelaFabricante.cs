@@ -3,31 +3,13 @@ using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
 {
-    public class TelaFabricante
+    public class TelaFabricante : TelaBase
     {
         private RepositorioFabricante repositorioFabricante;
 
-        public TelaFabricante(RepositorioFabricante repositorioF)
+        public TelaFabricante(RepositorioFabricante repositorioFab) : base("Fabricante")
         {
-            repositorioFabricante = repositorioF;
-        }
-
-        public char ApresentarMenu()
-        {
-            Console.Clear();
-            Console.WriteLine("----------------------------");
-            Console.WriteLine("Gestão de Fabricantes");
-            Console.WriteLine("----------------------------");
-            Console.WriteLine("1 - Cadastro de Fabricante");
-            Console.WriteLine("2 - Visualizar Fabricantes");
-            Console.WriteLine("3 - Editar Fabricantes");
-            Console.WriteLine("4 - Excluir Fabricantes");
-            Console.WriteLine("S - Sair");
-            Console.WriteLine("----------------------------");
-            Console.WriteLine("Digite uma opção válida: ");
-
-            char OpcaoEscolhida = Console.ReadLine().ToUpper()[0];
-            return OpcaoEscolhida;
+            repositorioFabricante = repositorioFab;
         }
 
         public void CadastrarRegistro()
