@@ -7,5 +7,6 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
         public int id;
 
         public abstract void AtualizarRegistro(EntidadeBase registroAtualizado);
+        public abstract string Validar();
     }
 }

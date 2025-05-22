@@ -22,7 +22,7 @@ namespace GestaoDeEquipamentos.ConsoleApp
             this.dataFabricacao = dataFabricacao;
         }
 
-        public string Validar()
+        public override string Validar()
         {
             string erros = "";
 

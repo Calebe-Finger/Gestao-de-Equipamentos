@@ -7,42 +7,10 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
     {
         private RepositorioFabricante repositorioFabricante;
 
-        public TelaFabricante(RepositorioFabricante repositorioFab) : base("Fabricante")
+        public TelaFabricante(RepositorioFabricante repositorioFab) : 
+            base("Fabricante", repositorioFab)
         {
             repositorioFabricante = repositorioFab;
-        }
-
-        public void CadastrarRegistro()
-        {
-            Console.WriteLine("--------------------------------------");
-            Console.WriteLine("Cadastro de Fabricantes");
-            Console.WriteLine("--------------------------------------");
-
-            Fabricante novoFabricante = ObterDados();
-
-            string erros = novoFabricante.Validar();
-
-            if (erros.Length > 0)
-            {
-                Console.WriteLine();
-
-                Console.ForegroundColor = ConsoleColor.Red;      //muda a cor da fonte para vermelho
-                Console.WriteLine($"Erros: \n{erros}");
-                Console.ResetColor();                               //volta a cor para a original
-
-                Console.Write("\nDigite ENTER para cadastrar novamente...");
-                Console.ReadLine();
-
-                //Recursão: Quando um método chama ele mesmo
-                CadastrarRegistro();
-
-                return;
-            }
-
-            repositorioFabricante.CadastrarRegistro(novoFabricante);
-
-            Console.WriteLine($"Fabricante \"{novoFabricante.nome}\" cadastrado com sucesso!");
-            Console.ReadLine();
         }
 
         public void EditarRegistro()
@@ -110,7 +78,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
             Console.ReadLine();
         }
 
-        private Fabricante ObterDados()
+        protected override Fabricante ObterDados()
         {
             Console.WriteLine("Digite o nome do fabricante: ");
             string nome = Console.ReadLine();

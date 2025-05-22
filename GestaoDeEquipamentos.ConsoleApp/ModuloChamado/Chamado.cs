@@ -20,7 +20,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
             this.equipamento = equipamento;
         }
 
-        public string Validar()
+        public override string Validar()
         {
             string erros = "";
 

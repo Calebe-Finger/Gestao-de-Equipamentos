@@ -16,7 +16,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
             this.telefone = telefone;
         }
 
-        public string Validar()
+        public override string Validar()
         {
             string erros = "";
 
