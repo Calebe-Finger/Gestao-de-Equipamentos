@@ -62,6 +62,44 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
             Console.ReadLine();
         }
 
+        public void EditarRegistro()
+        {
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine($"Edição de {nomeEntidade}");
+            Console.WriteLine("--------------------------------------");
+
+            VisualizarRegistros();
+
+            Console.WriteLine("Digite o ID no registro que deseja editar: ");
+            int idSelecionado = Convert.ToInt32(Console.ReadLine());
+
+            EntidadeBase registroAtualizado = ObterDados();
+
+            repositorio.EditarRegistro(idSelecionado, registroAtualizado);
+
+            Console.WriteLine($"{nomeEntidade} editado com sucesso!");
+            Console.ReadLine();
+        }
+
+        public abstract void VisualizarRegistros();
+
+        public void ExcluirRegistro()
+        {
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine($"Exclusão de {nomeEntidade}");
+            Console.WriteLine("--------------------------------------");
+
+            VisualizarRegistros();
+
+            Console.WriteLine("Digite o ID no registro que deseja excluir: ");
+            int idSelecionado = Convert.ToInt32(Console.ReadLine());
+
+            repositorio.ExcluirRegistro(idSelecionado);
+
+            Console.WriteLine($"Fabricante excluido com sucesso!");
+            Console.ReadLine();
+        }
+
         protected abstract EntidadeBase ObterDados();
     }
 }

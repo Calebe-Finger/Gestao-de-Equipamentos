@@ -13,26 +13,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
             repositorioFabricante = repositorioFab;
         }
 
-        public void EditarRegistro()
-        {
-            Console.WriteLine("--------------------------------------");
-            Console.WriteLine("Edição de Fabricantes");
-            Console.WriteLine("--------------------------------------");
-
-            VisualizarRegistros();
-
-            Console.WriteLine("Digite o ID no registro que deseja editar: ");
-            int idSelecionado = Convert.ToInt32(Console.ReadLine());
-
-            Fabricante fabricanteAtualizado = ObterDados();
-
-            repositorioFabricante.EditarRegistro(idSelecionado, fabricanteAtualizado);
-
-            Console.WriteLine($"Fabricante \"{fabricanteAtualizado.nome}\" editado com sucesso!");
-            Console.ReadLine();
-        }
-
-        public void VisualizarRegistros()
+        public override void VisualizarRegistros()
         {
             Console.Clear();
             Console.WriteLine("----------------------------");
@@ -58,23 +39,6 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
                     f.id, f.nome, f.email, f.telefone
                 );
             }
-            Console.ReadLine();
-        }
-
-        public void ExcluirRegistro()
-        {
-            Console.WriteLine("--------------------------------------");
-            Console.WriteLine("Exclusão de Fabricantes");
-            Console.WriteLine("--------------------------------------");
-
-            VisualizarRegistros();
-
-            Console.WriteLine("Digite o ID no registro que deseja excluir: ");
-            int idSelecionado = Convert.ToInt32(Console.ReadLine());
-
-            repositorioFabricante.ExcluirRegistro(idSelecionado);
-
-            Console.WriteLine($"Fabricante excluido com sucesso!");
             Console.ReadLine();
         }
 
