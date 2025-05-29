@@ -5,8 +5,8 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
 {
     public class TelaChamado : TelaBase
     {
-        private RepositorioEquipamento repositEquip;
         private RepositorioChamado repositChama;
+        private RepositorioEquipamento repositEquip;
 
         public TelaChamado (RepositorioChamado repositChama, RepositorioEquipamento repositEquip) 
             : base("Chamado", repositChama)
