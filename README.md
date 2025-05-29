@@ -10,10 +10,12 @@
  ## Funcionaçidades
  
  - O usuário pode criar, editar visualizar e excluir equipamentos.
- - O Programa foi criado seguindo o método de 
- > Orientação a Objetos, facilitando a compreenção e edição do mesmo.
+ - O Programa foi criado seguindo os métodos:
+ > Orientação a Objetos: Facilitando a compreenção e edição do mesmo.
  
- > Herança e Polimorfismo, simplificando o código e facilitando a compreenção, além de facilitar futuras edições.
+ > Encapsulamento: Protege os dados que estão sendo utilizados no programa.
+
+ > Herança e Polimorfismo: Reutilização do código, facilitando a compreenção e futuras edições.
  
  ## Tecnologias
  
