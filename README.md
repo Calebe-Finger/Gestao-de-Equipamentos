@@ -7,7 +7,7 @@
  Trata-se de um programa criado para a gestão de equipamentos de 
  forma rápida e fácil.
  
- ## Funcionaçidades
+ ## Funcionalidades
  
  - O usuário pode criar, editar visualizar e excluir equipamentos.
  - O Programa foi criado seguindo os métodos:
