@@ -1,9 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoDeEquipamentos.ConsoleApp", "GestaoDeEquipamentos.ConsoleApp\GestaoDeEquipamentos.ConsoleApp.csproj", "{116274B1-9052-4B43-BE55-9B644039E14A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Apresentação", "1. Apresentação", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Domínio", "2. Domínio", "{160FA6FB-A721-40EC-A4BE-806EB72650E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Infraestrutura", "3. Infraestrutura", "{6D49825D-3475-49F7-8AC4-8B5F30E46E7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoDeEquipamentos.Dominio", "GestaoDeEquipamentos.Dominio\GestaoDeEquipamentos.Dominio.csproj", "{664EC3D4-0CE2-4D55-BBCB-F47DE8B7A4D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoDeEquipamentos.Infraestrutura.Memoria", "GestaoDeEquipamentos.Infraestrutura.Memoria\GestaoDeEquipamentos.Infraestrutura.Memoria.csproj", "{062F0602-0AF6-4825-992D-24BEA4B7D1E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +25,22 @@ Global
 		{116274B1-9052-4B43-BE55-9B644039E14A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{116274B1-9052-4B43-BE55-9B644039E14A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{116274B1-9052-4B43-BE55-9B644039E14A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{664EC3D4-0CE2-4D55-BBCB-F47DE8B7A4D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{664EC3D4-0CE2-4D55-BBCB-F47DE8B7A4D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{664EC3D4-0CE2-4D55-BBCB-F47DE8B7A4D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{664EC3D4-0CE2-4D55-BBCB-F47DE8B7A4D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{062F0602-0AF6-4825-992D-24BEA4B7D1E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{062F0602-0AF6-4825-992D-24BEA4B7D1E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{062F0602-0AF6-4825-992D-24BEA4B7D1E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{062F0602-0AF6-4825-992D-24BEA4B7D1E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{116274B1-9052-4B43-BE55-9B644039E14A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{664EC3D4-0CE2-4D55-BBCB-F47DE8B7A4D3} = {160FA6FB-A721-40EC-A4BE-806EB72650E6}
+		{062F0602-0AF6-4825-992D-24BEA4B7D1E0} = {6D49825D-3475-49F7-8AC4-8B5F30E46E7F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {50108396-8267-4ECB-A214-B8D9A714D93C}

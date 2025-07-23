@@ -1,9 +1,13 @@
 ﻿
 using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+using GestaoDeEquipamentos.Dominio.ModuloChamado;
+using GestaoDeEquipamentos.Dominio.ModuloFabricante;
+using GestaoDeEquipamentos.Infraestrutura.ModuloChamado;
+using GestaoDeEquipamentos.Infraestrutura.ModuloEquipamento;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
 {
-    public class TelaChamado : TelaBase
+    public class TelaChamado : TelaBase<Chamado>, ITela
     {
         private RepositorioChamado repositChama;
         private RepositorioEquipamento repositEquip;
@@ -15,53 +19,50 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
             this.repositEquip = repositEquip;
         }
 
-        public override void VisualizarRegistros()
+        public override void VisualizarRegistros(bool exibirCabecalho)
         {
-            Console.Clear();
-            Console.WriteLine("----------------------------");
+            if (exibirCabecalho == true)
+                ExibirCabecalho();
+
             Console.WriteLine("Visualização de Chamados");
-            Console.WriteLine("----------------------------");
+
+            Console.WriteLine();
 
             Console.WriteLine(
-                "{0, -4} | {1, -26} | {2, -16} | {3, -14} | {4, -26}",
+                "{0, -10} | {1, -20} | {2, -15} | {3, -15} | {4, -20}",
                 "Id", "Título", "Descrição", "Data de Abertura", "Equipamento"
             );
 
-            EntidadeBase[] chamados = repositChama.SelecionarRegistros();
+            List<Chamado> chamados = repositorioChamado.SelecionarRegistros();
 
-            for (int i = 0; i < chamados.Length; i++)
+            foreach (Chamado c in chamados)
             {
-
-
-                Chamado c = (Chamado)chamados[i];
-
-                if (c == null)
-                    continue;
-
                 Console.WriteLine(
-                    "{0, -4} | {1, -26} | {2, -16} | {3, -14} | {4, -26}",
-                    c.id, c.titulo, c.descricao, c.dataAbertura.ToShortTimeString(), c.equipamento.nome
+                    "{0, -10} | {1, -20} | {2, -15} | {3, -15} | {4, -20}",
+                    c.Id, c.Titulo, c.Descricao, c.DataAbertura.ToShortDateString(), c.Equipamento.Nome
                 );
             }
+
             Console.ReadLine();
         }
 
         protected override Chamado ObterDados()
         {
-            Console.WriteLine("Digite o titulo do chamado: ");
+            Console.Write("Digite o título do chamado: ");
             string titulo = Console.ReadLine();
 
-            Console.WriteLine("Digite a descrição do chamado: ");
+            Console.Write("Digite a descrição do chamado: ");
             string descricao = Console.ReadLine();
 
-            DateTime dataAbertura = DateTime.Now; // pega a data e hora atuais do computador
+            DateTime dataAbertura = DateTime.Now;
 
             VisualizarEquipamentos();
 
-            Console.WriteLine("Digite o ID do chamado: ");
+            Console.Write("Digite o ID do equipamento que deseja selecionar: ");
             int idEquipamento = Convert.ToInt32(Console.ReadLine());
 
-            Equipamento equipamentoSelecionado = (Equipamento)repositEquip.SelecionarRegistroPorId(idEquipamento);
+            Equipamento equipamentoSelecionado =
+                repositorioEquipamento.SelecionarRegistroPorId(idEquipamento);
 
             Chamado chamado = new Chamado(titulo, descricao, dataAbertura, equipamentoSelecionado);
 
@@ -70,31 +71,29 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
 
         private void VisualizarEquipamentos()
         {
-            Console.Clear();
-            Console.WriteLine("----------------------------");
+            Console.WriteLine();
+
             Console.WriteLine("Visualização de Equipamentos");
-            Console.WriteLine("----------------------------");
+
+            Console.WriteLine();
 
             Console.WriteLine(
-                "{0, -4} | {1, -26} | {2, -16} | {3, -14} | {4, -26} | {5, -8} ",
+                "{0, -10} | {1, -20} | {2, -15} | {3, -15} | {4, -20} | {5, -15}",
                 "Id", "Nome", "Preço Aquisição", "Número Série", "Fabricante", "Data Fabricação"
             );
 
-            EntidadeBase[] equipamentos = repositEquip.SelecionarRegistros();
+            List<Equipamento> equipamentos = repositorioEquipamento.SelecionarRegistros();
 
-            for (int i = 0; i < equipamentos.Length; i++)
+            foreach (Equipamento e in equipamentos)
             {
-                Equipamento e = (Equipamento)equipamentos[i];
-
-                if (e == null)
-                    continue;
-
                 Console.WriteLine(
-                    "{0, -4} | {1, -26} | {2, -16} | {3, -14} | {4, -26} | {5, -8} ",
-                    e.id, e.nome, e.precoAquisicao.ToString("C2"), e.numeroSerie, e.fabricante, e.dataFabricacao.ToShortDateString()
+                    "{0, -10} | {1, -20} | {2, -15} | {3, -15} | {4, -20} | {5, -15}",
+                    e.Id, e.Nome, e.PrecoAquisicao.ToString("C2"), e.NumeroSerie, e.Fabricante.Nome, e.DataFabricacao.ToShortDateString()
                 );
             }
+
             Console.ReadLine();
         }
     }
 }
+

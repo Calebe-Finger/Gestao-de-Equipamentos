@@ -1,5 +1,8 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
 using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
+using GestaoDeEquipamentos.Infraestrutura.ModuloChamado;
+using GestaoDeEquipamentos.Infraestrutura.ModuloEquipamento;
+using GestaoDeEquipamentos.Infraestrutura.ModuloFabricante;
 
 namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
 {
@@ -12,7 +15,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
         private RepositorioChamado repositChamado;
 
         private TelaFabricante telaFabricante;
-        private TelaEquipamento telaEquip;
+        private TelaEquipamento telaEquipamento;
         private TelaChamado telaChamado;
 
         public TelaPrincipal()
@@ -23,7 +26,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
 
             telaFabricante = new TelaFabricante(repositFabricante);
 
-            telaEquip = new TelaEquipamento(repositEquip, repositFabricante);
+            telaEquipamento = new TelaEquipamento(repositEquip, repositFabricante);
 
             telaChamado = new TelaChamado(repositChamado, repositEquip);
         }
@@ -34,26 +37,26 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
             Console.WriteLine("----------------------------");
             Console.WriteLine("Gestão de Equipamentos");
             Console.WriteLine("----------------------------");
-            Console.WriteLine("1 - Controle de Equipametos");
-            Console.WriteLine("2 - Controle de Chamados");
-            Console.WriteLine("3 - Controle de Fabricantes");
+            Console.WriteLine("1 - Controle de Fabricantes");
+            Console.WriteLine("2 - Controle de Equipametos");
+            Console.WriteLine("3 - Controle de Chamados");
             Console.WriteLine("S - Sair");
             Console.WriteLine("----------------------------");
 
-            Console.WriteLine("Escolha uma opção");
+            Console.WriteLine("Escolha uma opção:");
             opcaoEscolhida = Console.ReadLine()[0];
         }
 
-        public TelaBase ObterTela()
+        public ITela? ObterTela()
         {
             if (opcaoEscolhida == '1')
-                return telaEquip;
+                return telaFabricante;
 
             else if (opcaoEscolhida == '2')
-                return telaChamado;
+                return telaEquipamento;
 
             else if (opcaoEscolhida == '3')
-                return telaFabricante;
+                return telaChamado;
 
             return null;
         }

@@ -1,9 +1,10 @@
-﻿
-using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+using GestaoDeEquipamentos.Dominio.ModuloFabricante;
+using GestaoDeEquipamentos.Infraestrutura.ModuloFabricante;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
 {
-    public class TelaFabricante : TelaBase
+    public class TelaFabricante : TelaBase<Fabricante>, ITela
     {
         private RepositorioFabricante repositorioFabricante;
 
@@ -13,44 +14,42 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
             repositorioFabricante = repositorioFab;
         }
 
-        public override void VisualizarRegistros()
+        public override void VisualizarRegistros(bool exibirCabecalho)
         {
-            Console.Clear();
-            Console.WriteLine("----------------------------");
+            if (exibirCabecalho == true)
+                ExibirCabecalho();
+
             Console.WriteLine("Visualização de Fabricantes");
-            Console.WriteLine("----------------------------");
+
+            Console.WriteLine();
 
             Console.WriteLine(
-                "{0, -4} | {1, -40} | {2, -40} | {3, -14}",
+                "{0, -10} | {1, -20} | {2, -30} | {3, -15}",
                 "Id", "Nome", "Email", "Telefone"
             );
 
-            EntidadeBase[] fabricantes = repositorioFabricante.SelecionarRegistros();
+            List<Fabricante> fabricantes = repositorioFabricante.SelecionarRegistros();
 
-            for (int i = 0; i < fabricantes.Length; i++)
+            foreach (Fabricante f in fabricantes)
             {
-                Fabricante f = (Fabricante)fabricantes[i];
-
-                if (f == null)
-                    continue;
-
                 Console.WriteLine(
-                    "{0, -4} | {1, -40} | {2, -40} | {3, -14}",
-                    f.id, f.nome, f.email, f.telefone
+                   "{0, -10} | {1, -20} | {2, -30} | {3, -15}",
+                    f.Id, f.Nome, f.Email, f.Telefone
                 );
             }
+
             Console.ReadLine();
         }
 
         protected override Fabricante ObterDados()
         {
-            Console.WriteLine("Digite o nome do fabricante: ");
+            Console.Write("Digite o nome do fabricante: ");
             string nome = Console.ReadLine();
 
-            Console.WriteLine("Digite o endereço de email do fabricante: ");
+            Console.Write("Digite o endereço de email do fabricante: ");
             string email = Console.ReadLine();
 
-            Console.WriteLine("Digite o telefone do fabricante: ");
+            Console.Write("Digite o telefone do fabricante: ");
             string telefone = Console.ReadLine();
 
             Fabricante fabricante = new Fabricante(nome, email, telefone);

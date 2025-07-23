@@ -1,23 +1,28 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
-using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
+using GestaoDeEquipamentos.Dominio.ModuloFabricante;
+using GestaoDeEquipamentos.Infraestrutura.ModuloEquipamento;
+using GestaoDeEquipamentos.Infraestrutura.ModuloFabricante;
 
 namespace GestaoDeEquipamentos.ConsoleApp
 {
-    public class TelaEquipamento : TelaBase
+    public class TelaEquipamento : TelaBase<Equipamento>, ITela
     {
         private RepositorioEquipamento repositEquip;
-        public RepositorioFabricante repositFabri;
+        private RepositorioFabricante repositFabri;
 
         public TelaEquipamento(
             RepositorioEquipamento repositorioEquip,
-            RepositorioFabricante repositorioFabri): base("Equipamento", repositorioEquip)
+            RepositorioFabricante repositorioFabri) : base("Equipamento", repositorioEquip)
         {
             this.repositEquip = repositorioEquip;
             this.repositFabri = repositorioFabri;
         }
 
-        public override void VisualizarRegistros()
+        public override void VisualizarRegistros(bool exibirCabecalho)
         {
+            if (exibirCabecalho == true)
+                ExibirCabecalho();
+
             Console.WriteLine("Visualização de Equipamentos");
 
             Console.WriteLine();
@@ -27,18 +32,40 @@ namespace GestaoDeEquipamentos.ConsoleApp
                 "Id", "Nome", "Preço Aquisição", "Número Série", "Fabricante", "Data Fabricação"
             );
 
-            EntidadeBase[] equipamentos = repositEquip.SelecionarRegistros();
+            List<Equipamento> equipamentos = repositorioEquipamento.SelecionarRegistros();
 
-            for (int i = 0; i < equipamentos.Length; i++)
+            foreach (Equipamento e in equipamentos)
             {
-                Equipamento e = (Equipamento)equipamentos[i];
-
-                if (e == null)
-                    continue;
-
                 Console.WriteLine(
                     "{0, -10} | {1, -20} | {2, -15} | {3, -15} | {4, -20} | {5, -15}",
-                    e.id, e.nome, e.precoAquisicao.ToString("C2"), e.numeroSerie, e.fabricante, e.dataFabricacao.ToShortDateString()
+                    e.Id, e.Nome, e.PrecoAquisicao.ToString("C2"), e.NumeroSerie, e.Fabricante.Nome, e.DataFabricacao.ToShortDateString()
+                );
+            }
+
+            Console.ReadLine();
+        }
+
+        public void VisualizarFabricantes()
+        {
+            Console.WriteLine();
+
+            Console.WriteLine("Visualização de Fabricantes");
+
+            Console.WriteLine();
+
+            Console.WriteLine(
+                "{0, -10} | {1, -20} | {2, -30} | {3, -15}",
+                "Id", "Nome", "Email", "Telefone"
+            );
+
+            List<Fabricante> fabricantes = repositorioFabricante.SelecionarRegistros();
+
+            foreach (Fabricante f in fabricantes)
+            {
+
+                Console.WriteLine(
+                   "{0, -10} | {1, -20} | {2, -30} | {3, -15}",
+                    f.Id, f.Nome, f.Email, f.Telefone
                 );
             }
 
@@ -47,23 +74,33 @@ namespace GestaoDeEquipamentos.ConsoleApp
 
         protected override Equipamento ObterDados()
         {
-            Console.WriteLine("Digite o nome do equipamento: ");
+            Console.Write("Digite o nome do equipamento: ");
             string nome = Console.ReadLine();
 
-            Console.WriteLine("Digite o preço de aquisição do equipamento: ");
+            Console.Write("Digite o preço de aquisição do equipamento: ");
             decimal precoAquisicao = Convert.ToDecimal(Console.ReadLine());
 
-            Console.WriteLine("Digite o número de série do equipamento: ");
+            Console.Write("Digite o número de série do equipamento: ");
             string numeroSerie = Console.ReadLine();
 
-            Console.WriteLine("Digite o nome da fabricante do equipamento: ");
-            string fabricante = Console.ReadLine();
-
-            Console.WriteLine("Digite a data de fabricação do equipamento: ");
+            Console.Write("Digite a data de fabricação do equipamento: ");
             DateTime dataFabricacao = DateTime.Parse(Console.ReadLine());
 
-            Equipamento equipamento = new Equipamento(nome, precoAquisicao, numeroSerie, 
-                fabricante, dataFabricacao);
+            VisualizarFabricantes();
+
+            Console.Write("Digite o id do fabricante do equipamento: ");
+            int idFabricante = Convert.ToInt32(Console.ReadLine());
+
+            Fabricante fabricanteSelecionado =
+                repositorioFabricante.SelecionarRegistroPorId(idFabricante);
+
+            Equipamento equipamento = new Equipamento(
+                nome,
+                precoAquisicao,
+                numeroSerie,
+                fabricanteSelecionado,
+                dataFabricacao
+            );
 
             return equipamento;
         }
